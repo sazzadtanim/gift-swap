@@ -10,7 +10,7 @@ export default function Home() {
     return <h2>b</h2>;
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center p-24 gap-10">
       <h1 className="text-3xl">Gift Events</h1>
       <Events />
     </main>
