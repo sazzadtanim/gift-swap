@@ -6,7 +6,7 @@ interface INavigationOption {
   url: string;
 }
 const navOptionsLeft: INavigationOption[] = [
-  { title: "Your families", url: "families" },
+  { title: "Your families", url: "/" },
   { title: "Your Events", url: "events" },
 ];
 

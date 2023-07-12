@@ -4,7 +4,7 @@ import Event, { IEvent } from "./event";
 const events: IEvent[] = [
   {
     date: "2/22/2022",
-    details: "",
+    details: "Mother's Day",
     imgUrl:
       "https://images.pexels.com/photos/3309878/pexels-photo-3309878.jpeg",
     title: "",

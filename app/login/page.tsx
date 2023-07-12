@@ -1,42 +1,64 @@
 "use client";
-import React, { Suspense, useState } from "react";
-import Loading from "./loading";
+import { Login, validateLogin } from "@/zodValidator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import DynamicInputList from "../components/DynamicInputList";
+import DynamicButton from "../components/DynamicButton";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<Login>({ resolver: zodResolver(validateLogin) });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  async function onFormSubmit(data: Login) {
+    console.log(data);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      });
-      const token = response.json();
+      const response = await fetch(
+        "http://localhost:8080/api/v1/auth/register",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+        }
+      );
+      // Use response
     } catch (error) {
       console.error("Login failed", error);
     }
-  };
+  }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onFormSubmit)}
       className="flex gap-4 flex-col max-w-sm mx-auto"
     >
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+      <DynamicInputList
+        errors={errors}
+        inputlist={[
+          {
+            label: "email",
+            name: "email",
+            placeholder: "example@email.com",
+            type: "text",
+          },
+          {
+            label: "password",
+            name: "password",
+            placeholder: "xxxxxxxx",
+            type: "password",
+          },
+        ]}
+        register={register}
       />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+      <DynamicButton
+        size="medium"
+        state="primary"
+        text="Login"
+        type="submit"
+        animate
       />
-      <button type="submit">Log In</button>
     </form>
   );
 }

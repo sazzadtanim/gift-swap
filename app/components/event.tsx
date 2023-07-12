@@ -18,7 +18,7 @@ export default function Event(props: IEvent) {
       <Suspense fallback={<Loading />}>
         <Image
           src={props.imgUrl}
-          alt={""}
+          alt={`Event image ${props.title}`}
           width={200}
           height={350}
           placeholder="blur"
