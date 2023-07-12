@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+import { fontFamily } from "tailwindcss/defaultTheme";
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -6,6 +8,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      inter: ["var(--font-inter)", ...fontFamily.sans],
+    },
     backgroundImage: {
       gradient_deep_blue: `linear-gradient(to right, #6a11cb 0%, #2575fc 100%)`,
       gradient_green: `linear-gradient(to right, #43e97b 0%, #38f9d7 100%)`,
